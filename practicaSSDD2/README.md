@@ -1,1 +1,0 @@
-# practicaSSDD2
