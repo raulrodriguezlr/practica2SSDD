@@ -8,6 +8,7 @@ public class PracticaSsdd2Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PracticaSsdd2Application.class, args);
+		prueba
 	}
 
 }
