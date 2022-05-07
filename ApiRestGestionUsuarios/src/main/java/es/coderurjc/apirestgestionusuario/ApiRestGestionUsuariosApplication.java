@@ -1,14 +1,13 @@
-package com.example.demo;
+package es.coderurjc.apirestgestionusuario;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PracticaSsdd2Application {
+public class ApiRestGestionUsuariosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PracticaSsdd2Application.class, args);
-		prueba
+		SpringApplication.run(ApiRestGestionUsuariosApplication.class, args);
 	}
 
 }

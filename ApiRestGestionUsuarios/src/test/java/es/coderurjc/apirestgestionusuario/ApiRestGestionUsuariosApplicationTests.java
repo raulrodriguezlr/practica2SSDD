@@ -1,10 +1,10 @@
-package com.example.demo;
+package es.coderurjc.apirestgestionusuario;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PracticaSsdd2ApplicationTests {
+class ApiRestGestionUsuariosApplicationTests {
 
 	@Test
 	void contextLoads() {
