@@ -1,13 +1,13 @@
-package es.coderurjc.apirestgestionusuario;
+package es.codeurjc.apirestreservabicicletas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiRestGestionUsuariosApplication {
+public class ApiRestReservaBicicletasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiRestGestionUsuariosApplication.class, args);
+		SpringApplication.run(ApiRestReservaBicicletasApplication.class, args);
 	}
 
 }
