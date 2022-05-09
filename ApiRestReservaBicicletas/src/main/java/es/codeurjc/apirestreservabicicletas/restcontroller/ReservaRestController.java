@@ -27,15 +27,15 @@ import es.codeurjc.apirestgestionusuarios.usuarios.Usuario;
 public class ReservaRestController {
 
 	@GetMapping("/usuarios")
-	public List<String> usuarios(){
-		List<String> listaUsuarios = new ArrayList<String>();
+	public List<Usuario> usuarios(){
+		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		RestTemplate restTemplate = new RestTemplate();
-		String url ="https://localhost:8081/api/users";
+		String url ="https://localhost:8081/api/users/";
 		Usuario[] users = restTemplate.getForObject(url, Usuario[].class);
-		for (Usuario usuarios : users) {
-			listaUsuarios.add(usuarios.getText());
-			
+		for (Usuario u : users) {
+			listaUsuarios.add(u);
 		}
+		
 		return listaUsuarios;
 		
 	}
