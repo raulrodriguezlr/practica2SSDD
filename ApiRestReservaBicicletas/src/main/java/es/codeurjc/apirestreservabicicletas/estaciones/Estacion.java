@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.codeurjc.apirestreservabicicletas.bicicletas.Bicicleta;
 
 @Entity
@@ -24,9 +26,10 @@ public class Estacion {
 	public int capacidad;
 	public String estado;
 	public String fechaInstalacion;
+	@JsonIgnore
 	@OneToMany(mappedBy="estacion")
 	public List<Bicicleta> bicis;
-	
+	public Estacion () {}
 	public Estacion(int numeroSerie, String coordenadas,int capacidad) {
 		super();
 		this.numeroSerie = numeroSerie; 

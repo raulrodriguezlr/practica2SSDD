@@ -22,7 +22,7 @@ public class Usuario implements Serializable{
 	
 	public String contraseña;
 	
-	public String nombreCompleto;
+	public String name;
 	
 	public String fechaAlta;
 	public String estado;
@@ -35,7 +35,7 @@ public class Usuario implements Serializable{
 	public Usuario(String login,String name,String contraseña) {
 		super();
 		this.login=login;
-		this.nombreCompleto = name; 
+		this.name = name; 
 		
 		this.contraseña=contraseña;
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -50,7 +50,7 @@ public class Usuario implements Serializable{
 	}
 	public void setName(String nombreNuevo) {
 		
-		this.nombreCompleto=nombreNuevo;
+		this.name=nombreNuevo;
 	}
 	public void setActivo(String estado) {
 		
@@ -71,7 +71,7 @@ public class Usuario implements Serializable{
 		return this.login;
 	}
 	public String getName() {
-		return this.nombreCompleto;
+		return this.name;
 	}
 	
 	public String getContraseña() {

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.codeurjc.apirestreservabicicletas.estaciones.Estacion;
 
 
@@ -23,6 +25,7 @@ public class Bicicleta {
 	public String fecha_alta;
 	public String estado;
 	
+	@JsonIgnore
 	@ManyToOne
 	public Estacion estacion;
 	

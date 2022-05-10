@@ -18,7 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import es.codeurjc.apirestgestionusuarios.usuarios.Usuario;
+//import es.codeurjc.apirestgestionusuarios.usuarios.Usuario;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+
+import es.codeurjc.apirestreservabicicletas.bicicletas.*;
+import es.codeurjc.apirestreservabicicletas.estaciones.EstacionService;
 
 
 
@@ -26,17 +33,40 @@ import es.codeurjc.apirestgestionusuarios.usuarios.Usuario;
 @RequestMapping("/api/reserve")
 public class ReservaRestController {
 
-	@GetMapping("/usuarios")
-	public List<Usuario> usuarios(){
-		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+@Autowired
+private BicicletaService bservice;
+@Autowired
+private EstacionService eservice;
+
+/*
+	@PutMapping("/")
+	public List<String> usuarios(){
+		
+		
+		
 		RestTemplate restTemplate = new RestTemplate();
 		String url ="https://localhost:8081/api/users/";
-		Usuario[] users = restTemplate.getForObject(url, Usuario[].class);
-		for (Usuario u : users) {
-			listaUsuarios.add(u);
-		}
 		
-		return listaUsuarios;
+		ObjectNode[] dataNodes = restTemplate.getForObject(url, ObjectNode[].class);
+		
+		
+		return uNombres;
+	}
+	*/
+	@GetMapping("/")
+	public List<Bicicleta> getUsuarios(){
+		
+		return bservice.findAll();
+	}
+	@GetMapping("/{id}")
+	public ResponseEntity<Bicicleta> getUsuario(@PathVariable long id){
+		
+		Optional<Bicicleta> usuario = bservice.findOne(id);
+		if (usuario != null) 
+			return ResponseEntity.ok(usuario.get());
+		else
+			return ResponseEntity.notFound().build();
+		
 		
 	}
 }
