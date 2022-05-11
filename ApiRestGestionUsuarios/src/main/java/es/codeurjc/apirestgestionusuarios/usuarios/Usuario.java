@@ -27,12 +27,12 @@ public class Usuario implements Serializable{
 	public String fechaAlta;
 	public String estado;
 	
-	public int saldo;
+	public double saldo;
 	
 	
 	public Usuario() {}
 	
-	public Usuario(String login,String name,String contraseña) {
+	public Usuario(String login,String name,String contraseña,int saldo) {
 		super();
 		this.login=login;
 		this.name = name; 
@@ -41,7 +41,7 @@ public class Usuario implements Serializable{
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		this.fechaAlta = dtf.format(LocalDateTime.now());
 		this.estado="ACTIVO";
-		this.saldo=0;
+		this.saldo=saldo;
 				
 	}
 	//SETTERS
@@ -60,7 +60,7 @@ public class Usuario implements Serializable{
 	public void setPassword(String contraseña) {
 		this.contraseña=contraseña;
 	}
-	public void setSaldo(int saldo) {
+	public void setSaldo(double saldo) {
 		this.saldo=saldo;
 	}
 	
@@ -80,7 +80,7 @@ public class Usuario implements Serializable{
 	public String getEstado() {
 		return this.estado;
 	}
-	public int getSaldo() {
+	public double getSaldo() {
 		return this.saldo;
 	}
 	public long getId() {

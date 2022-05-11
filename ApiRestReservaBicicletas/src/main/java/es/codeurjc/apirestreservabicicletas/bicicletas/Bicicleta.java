@@ -22,7 +22,7 @@ public class Bicicleta {
 	public long id_b;
 	public String numero_serie;
 	public String modelo;
-	public String fecha_alta;
+	public String fechaAlta;
 	public String estado;
 	
 	@JsonIgnore
@@ -37,7 +37,7 @@ public Bicicleta() {}
 		this.numero_serie=numeroSerie;
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-		this.fecha_alta = dtf.format(LocalDateTime.now());
+		this.fechaAlta = dtf.format(LocalDateTime.now());
 		this.estado="Sin-Base";
 				
 	}
@@ -47,7 +47,7 @@ public Bicicleta() {}
 		this.numero_serie=numeroSerie;
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-		this.fecha_alta = dtf.format(LocalDateTime.now());
+		this.fechaAlta = dtf.format(LocalDateTime.now());
 		this.estado=estado;
 				
 	}
@@ -67,11 +67,11 @@ public Bicicleta() {}
 		this.modelo=modelo;
 	}
 	
-	public long getId() {
+	public long getId_b() {
 		return id_b;
 	}
 	
-	public String getNumeroSerie() {
+	public String getNumero_serie() {
 		return this.numero_serie;
 	}
 	
@@ -85,6 +85,9 @@ public Bicicleta() {}
 	
 	public Estacion getEstacion() {
 		return this.estacion;
+	}
+	public String getFechaAlta() {
+		return this.fechaAlta;
 	}
 	
 	

@@ -57,6 +57,20 @@ public class Estacion {
 			System.out.println("NullPointerException");
 		}
 	}
+	public void borrarBici(Bicicleta bici) {
+		bicis.remove(bici);
+	}
+	public void add(Bicicleta bici) {
+		try {
+			if (bicis.size()<=capacidad){
+				bicis.add(bici);
+				
+			}
+			else 
+				throw new NullPointerException("La capacidad esta llena");
+		}catch(NullPointerException ex) {}
+		
+	}
 	
 	public boolean estacionLlena() {
 		return capacidad==bicis.size();

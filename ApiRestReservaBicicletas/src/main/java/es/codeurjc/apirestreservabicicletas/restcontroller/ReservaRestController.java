@@ -21,10 +21,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 //import es.codeurjc.apirestgestionusuarios.usuarios.Usuario;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-
+import es.codeurjc.apirestreservabicicletas.Ids;
 import es.codeurjc.apirestreservabicicletas.bicicletas.*;
+import es.codeurjc.apirestreservabicicletas.estaciones.Estacion;
 import es.codeurjc.apirestreservabicicletas.estaciones.EstacionService;
 
 
@@ -38,25 +40,90 @@ private BicicletaService bservice;
 @Autowired
 private EstacionService eservice;
 
-/*
+
 	@PutMapping("/")
-	public List<String> usuarios(){
-		
-		
-		
-		RestTemplate restTemplate = new RestTemplate();
-		String url ="https://localhost:8081/api/users/";
-		
-		ObjectNode[] dataNodes = restTemplate.getForObject(url, ObjectNode[].class);
-		
-		
-		return uNombres;
+	public ResponseEntity<Bicicleta> reservar(@RequestBody Ids ids) {
+		try {
+		Optional<Estacion> e =eservice.findOne(ids.getId_estacion());
+		Optional<Bicicleta>b =bservice.findOne(ids.getId_bici());
+		if(e!=null&&b!=null) {
+			Estacion estacion=e.get();
+			Bicicleta bici=b.get();
+			RestTemplate restTemplate = new RestTemplate();
+			String url ="http://localhost:8081/api/users/"+ids.getId_usuario();
+			ObjectNode data = restTemplate.getForObject(url, ObjectNode.class);
+			double saldoActual =data.get("saldo").asDouble();
+			if(saldoActual>=3) {
+				if(estacion.getEstado().equals("ACTIVO")&&bici.getEstacion().getId()==estacion.getId()&&bici.getEstado().equals("En-Base")) {
+					Double NuevoSaldo =data.get("saldo").asDouble()-3;
+				
+					b.get().setEstado("RESERVADA");
+					b.get().setEstacion(null);
+					e.get().borrarBici(b.get());
+					eservice.save(e.get());
+					bservice.save(b.get());
+					data.put("saldo",NuevoSaldo );
+					restTemplate.put(url,data);
+					
+					URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+					return ResponseEntity.created(location).build();
+				}
+				else
+					return ResponseEntity.unprocessableEntity().build();
+			}else
+				System.out.println("\n no hay saldo suficiente");
+		}else
+			return ResponseEntity.notFound().build();
+		}catch(NullPointerException ex) {System.out.println("\nNo se ha podido encontrar esa bici en esa estacion o bien los ids son nulos");}
+		return null; 
 	}
-	*/
-	@GetMapping("/")
-	public List<Bicicleta> getUsuarios(){
+	
+	@PutMapping("/libre")
+	public ResponseEntity<Bicicleta> liberar(@RequestBody Ids ids){
+		Optional<Estacion> e =eservice.findOne(ids.getId_estacion());
+		Optional<Bicicleta>b =bservice.findOne(ids.getId_bici());
+		if(e!=null&&b!=null) {
+			Estacion estacion=e.get();
+			Bicicleta bici=b.get();
+			if(estacion.getEstado().equals("ACTIVO")&&bici.getEstado().equals("RESERVADA")) {
+				if(estacion.getCapacidad()>estacion.getBicis().size()) {
+					
+					RestTemplate restTemplate = new RestTemplate();
+					String url ="http://localhost:8081/api/users/"+ids.getId_usuario();
+					ObjectNode data = restTemplate.getForObject(url, ObjectNode.class);
+					Double NuevoSaldo =data.get("saldo").asDouble()+1.5;
+					b.get().setEstado("En-Base");
+					b.get().setEstacion(e.get());
+					e.get().add(b.get());
+					eservice.save(e.get());
+					bservice.save(b.get());
+					data.put("saldo",NuevoSaldo );
+					restTemplate.put(url,data);
+					
+					URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+						return ResponseEntity.created(location).build();
+					}
+				else
+					throw new NullPointerException("La capacidad esta llena");
+				}
+			else {
+				return ResponseEntity.unprocessableEntity().build();
+			}
+		}
+		else
+			return ResponseEntity.notFound().build();
+		
+	}
+	
+	@GetMapping("/bicis")
+	public List<Bicicleta> getBicis(){
 		
 		return bservice.findAll();
+	}
+	@GetMapping("/estaciones")
+	public List<Estacion> getEstaciones(){
+		
+		return eservice.findAll();
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<Bicicleta> getUsuario(@PathVariable long id){

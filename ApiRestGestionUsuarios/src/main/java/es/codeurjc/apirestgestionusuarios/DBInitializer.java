@@ -24,18 +24,20 @@ public class DBInitializer {
 	
 	@Autowired
 	private UserService User;
-
-
-
+	@Autowired
+	private RepoUsuario UserRepo;
+	
 	
 	@PostConstruct
 	public void userDB() {
 		
-		User.save(
-			new Usuario("rulo1212","Raul Rodriguez", "Qwerty123456")
-			
-			
-			);
+		UserRepo.saveAll(Arrays.asList(
+				new Usuario("Raul"," Rodriguez", "Qwerty123456",20),
+				new Usuario("Daniel"," Requena", "123456Qwerty",20),
+				new Usuario("David"," Gomez", "SSDD2021/2022",20),
+				new Usuario("Oscar"," Soto", "SSDDApoyo2021/2022",15),
+				new Usuario("alonso"," Vazquez", ".-SSDD.-",5)
+				));
 	}
 	}
 
