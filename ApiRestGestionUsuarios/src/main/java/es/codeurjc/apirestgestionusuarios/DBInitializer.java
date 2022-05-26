@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import es.codeurjc.apirestgestionusuarios.model.Usuario;
+import es.codeurjc.apirestgestionusuarios.repository.RepoUsuario;
+import es.codeurjc.apirestgestionusuarios.service.UserService;
 
-import es.codeurjc.apirestgestionusuarios.usuarios.*;
 
 
 import javax.annotation.PostConstruct;
@@ -32,11 +34,11 @@ public class DBInitializer {
 	public void userDB() {
 		
 		UserRepo.saveAll(Arrays.asList(
-				new Usuario("Raul"," Rodriguez", "Qwerty123456",20),
-				new Usuario("Daniel"," Requena", "123456Qwerty",20),
-				new Usuario("David"," Gomez", "SSDD2021/2022",20),
-				new Usuario("Oscar"," Soto", "SSDDApoyo2021/2022",15),
-				new Usuario("alonso"," Vazquez", ".-SSDD.-",5)
+				new Usuario("raulrodriguezlr","Raul Rodriguez", "Qwerty123456",20),
+				new Usuario("requelgns"," Daniel Requena", "123456Qwerty",20),
+				new Usuario("David0101"," David Gomez", "SSDD2021/2022",20),
+				new Usuario("Oscar2122"," Oscar Soto", "SSDDApoyo2021/2022",15),
+				new Usuario("alongazo"," Alonso Vazquez", ".-SSDD.-",5)
 				));
 	}
 	}

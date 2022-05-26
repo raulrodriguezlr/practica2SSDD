@@ -1,4 +1,4 @@
-package es.codeurjc.apirestreservabicicletas.bicicletas;
+package es.codeurjc.apirestreservabicicletas.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.apirestreservabicicletas.bicicletas.*;
-import es.codeurjc.apirestreservabicicletas.estaciones.Estacion;
+
+import es.codeurjc.apirestreservabicicletas.model.Bicicleta;
+import es.codeurjc.apirestreservabicicletas.model.Estacion;
+import es.codeurjc.apirestreservabicicletas.repository.RepoBicicletas;
 
 
 @Service

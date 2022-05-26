@@ -1,10 +1,13 @@
-package es.codeurjc.apirestreservabicicletas.estaciones;
+package es.codeurjc.apirestreservabicicletas.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import es.codeurjc.apirestreservabicicletas.model.Estacion;
+import es.codeurjc.apirestreservabicicletas.repository.RepoEstacion;
 
 
 

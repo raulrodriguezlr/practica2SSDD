@@ -1,6 +1,8 @@
 package es.codeurjc.apirestgestionusuarios.restcontroller;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,17 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import es.codeurjc.apirestgestionusuarios.usuarios.UserService;
-import es.codeurjc.apirestgestionusuarios.usuarios.Usuario;
+import es.codeurjc.apirestgestionusuarios.model.Usuario;
+import es.codeurjc.apirestgestionusuarios.service.UserService;
 
-import es.codeurjc.apirestreservabicicletas.bicicletas.*;
-
-import es.codeurjc.apirestreservabicicletas.estaciones.*;
 
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/usuarios")
 public class UsuarioRestController {
 	@Autowired
 	private UserService users;
@@ -53,6 +52,12 @@ public class UsuarioRestController {
 	}
 	@PostMapping("/")
 	public ResponseEntity<Usuario> createUser(@RequestBody Usuario user){
+		if(user.getEstado()==null)
+			user.setActivo("ACTIVO");
+		if(user.getFechaAlta()==null) {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+			user.setFecha( dtf.format(LocalDateTime.now()));
+		}
 		users.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(location).body(user);
@@ -65,7 +70,7 @@ public class UsuarioRestController {
 		Usuario u ;
 		if (usuario != null) {
 			u=usuario.get();
-			users.editarActivo(u.getId(),"Inactivo");
+			users.editarActivo(u.getId(),"INACTIVO");
 			return ResponseEntity.ok(u);
 		}
 		else
@@ -79,17 +84,21 @@ public class UsuarioRestController {
 		Usuario u;
 		if(usuario.isPresent()) {
 			u=usuario.get();
-			u.setName(NewUsuario.getName());
-			u.setLogin(NewUsuario.getLogin());
-			u.setPassword(NewUsuario.getContraseña());
-			u.setSaldo(NewUsuario.getSaldo());
+			if (NewUsuario.getName()!=null) 
+				u.setName(NewUsuario.getName());
+			if(NewUsuario.getLogin()!=null)
+				u.setLogin(NewUsuario.getLogin());
+			if(NewUsuario.getContraseña()!=null)
+				u.setPassword(NewUsuario.getContraseña());
+			if(NewUsuario.getSaldo()!=0)
+				u.setSaldo(NewUsuario.getSaldo());
 			users.save(u);
 			return ResponseEntity.ok(u);
 		}
 		else
 			return ResponseEntity.notFound().build();
 	}
-	@PutMapping("/pago/{id}")
+	@PutMapping("/pagos/{id}")
 	public ResponseEntity<Usuario> pago(@PathVariable long id){
 		Optional<Usuario> u = users.findOne(id);
 		Usuario usuario;
@@ -108,7 +117,7 @@ public class UsuarioRestController {
 			return ResponseEntity.notFound().build();
 		
 	}
-	@PutMapping("/devolucion/{id}")
+	@PutMapping("/devoluciones/{id}")
 	public ResponseEntity<Usuario>devolucion(@PathVariable long id){
 		Optional<Usuario> u = users.findOne(id);
 		Usuario usuario;

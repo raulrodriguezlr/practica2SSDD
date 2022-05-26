@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
 
-import es.codeurjc.apirestreservabicicletas.bicicletas.*;
 
-import es.codeurjc.apirestreservabicicletas.estaciones.*;
+import es.codeurjc.apirestreservabicicletas.model.Bicicleta;
+import es.codeurjc.apirestreservabicicletas.model.Estacion;
+import es.codeurjc.apirestreservabicicletas.repository.RepoBicicletas;
+import es.codeurjc.apirestreservabicicletas.repository.RepoEstacion;
 
 @Component
 

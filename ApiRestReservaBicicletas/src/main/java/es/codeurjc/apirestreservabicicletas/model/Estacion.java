@@ -1,4 +1,4 @@
-package es.codeurjc.apirestreservabicicletas.estaciones;
+package es.codeurjc.apirestreservabicicletas.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import es.codeurjc.apirestreservabicicletas.bicicletas.Bicicleta;
 
 @Entity
 public class Estacion {

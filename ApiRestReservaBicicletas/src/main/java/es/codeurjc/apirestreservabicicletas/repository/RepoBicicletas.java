@@ -1,4 +1,4 @@
-package es.codeurjc.apirestreservabicicletas.bicicletas;
+package es.codeurjc.apirestreservabicicletas.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.codeurjc.apirestreservabicicletas.bicicletas.Bicicleta;
-import es.codeurjc.apirestreservabicicletas.estaciones.Estacion;
+import es.codeurjc.apirestreservabicicletas.model.Bicicleta;
+import es.codeurjc.apirestreservabicicletas.model.Estacion;
 
 @Transactional
 public interface RepoBicicletas  extends JpaRepository<Bicicleta, Long>{

@@ -25,14 +25,16 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.codeurjc.apirestreservabicicletas.Ids;
-import es.codeurjc.apirestreservabicicletas.bicicletas.*;
-import es.codeurjc.apirestreservabicicletas.estaciones.Estacion;
-import es.codeurjc.apirestreservabicicletas.estaciones.EstacionService;
+
+import es.codeurjc.apirestreservabicicletas.model.Bicicleta;
+import es.codeurjc.apirestreservabicicletas.model.Estacion;
+import es.codeurjc.apirestreservabicicletas.service.BicicletaService;
+import es.codeurjc.apirestreservabicicletas.service.EstacionService;
 
 
 
 @RestController
-@RequestMapping("/api/reserve")
+@RequestMapping("/api/reservas")
 public class ReservaRestController {
 
 @Autowired
@@ -50,7 +52,7 @@ private EstacionService eservice;
 			Estacion estacion=e.get();
 			Bicicleta bici=b.get();
 			RestTemplate restTemplate = new RestTemplate();
-			String url ="http://localhost:8081/api/users/"+ids.getId_usuario();
+			String url ="http://localhost:8081/api/usuarios/"+ids.getId_usuario();
 			ObjectNode data = restTemplate.getForObject(url, ObjectNode.class);
 			double saldoActual =data.get("saldo").asDouble();
 			if(saldoActual>=3) {
@@ -78,7 +80,7 @@ private EstacionService eservice;
 		return null; 
 	}
 	
-	@PutMapping("/libre")
+	@PutMapping("/devoluciones")
 	public ResponseEntity<Bicicleta> liberar(@RequestBody Ids ids){
 		Optional<Estacion> e =eservice.findOne(ids.getId_estacion());
 		Optional<Bicicleta>b =bservice.findOne(ids.getId_bici());
@@ -89,7 +91,7 @@ private EstacionService eservice;
 				if(estacion.getCapacidad()>estacion.getBicis().size()) {
 					
 					RestTemplate restTemplate = new RestTemplate();
-					String url ="http://localhost:8081/api/users/"+ids.getId_usuario();
+					String url ="http://localhost:8081/api/usuarios/"+ids.getId_usuario();
 					ObjectNode data = restTemplate.getForObject(url, ObjectNode.class);
 					Double NuevoSaldo =data.get("saldo").asDouble()+1.5;
 					b.get().setEstado("En-Base");
@@ -115,6 +117,7 @@ private EstacionService eservice;
 		
 	}
 	
+	/*ESTO DE ACONTINUACION ES PARA DEBUGGEAR NO SE PIDE*/
 	@GetMapping("/bicis")
 	public List<Bicicleta> getBicis(){
 		
@@ -126,7 +129,7 @@ private EstacionService eservice;
 		return eservice.findAll();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Bicicleta> getUsuario(@PathVariable long id){
+	public ResponseEntity<Bicicleta> getBici(@PathVariable long id){
 		
 		Optional<Bicicleta> usuario = bservice.findOne(id);
 		if (usuario != null) 

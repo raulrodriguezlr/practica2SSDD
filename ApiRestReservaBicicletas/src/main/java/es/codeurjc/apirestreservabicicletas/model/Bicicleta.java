@@ -1,4 +1,4 @@
-package es.codeurjc.apirestreservabicicletas.bicicletas;
+package es.codeurjc.apirestreservabicicletas.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import es.codeurjc.apirestreservabicicletas.estaciones.Estacion;
 
 
 

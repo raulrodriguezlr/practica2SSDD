@@ -1,4 +1,4 @@
-package es.codeurjc.apirestgestionusuarios.usuarios;
+package es.codeurjc.apirestgestionusuarios.model;
 import java.net.URL;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -72,6 +72,12 @@ public class Usuario implements Serializable{
 	}
 	public String getName() {
 		return this.name;
+	}
+	public String getFechaAlta() {
+		return this.fechaAlta;
+	}
+	public void setFecha(String fecha) {
+		this.fechaAlta=fecha;
 	}
 	
 	public String getContraseña() {
