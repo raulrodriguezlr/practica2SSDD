@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 
@@ -20,7 +20,7 @@ import es.codeurjc.apirestreservabicicletas.repository.RepoBicicletas;
 import es.codeurjc.apirestreservabicicletas.repository.RepoEstacion;
 
 @Component
-
+@Profile("local")
 public class DBInitializer {
 	
 	

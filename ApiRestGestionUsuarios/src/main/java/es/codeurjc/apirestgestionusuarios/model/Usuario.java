@@ -32,7 +32,7 @@ public class Usuario implements Serializable{
 	
 	public Usuario() {}
 	
-	public Usuario(String login,String name,String contraseña,int saldo) {
+	public Usuario(String login,String name,String contraseña,double saldo) {
 		super();
 		this.login=login;
 		this.name = name; 
@@ -52,12 +52,12 @@ public class Usuario implements Serializable{
 		
 		this.name=nombreNuevo;
 	}
-	public void setActivo(String estado) {
+	public void setEstado(String estado) {
 		
 		this.estado=estado;
 	}
 	
-	public void setPassword(String contraseña) {
+	public void setContraseña(String contraseña) {
 		this.contraseña=contraseña;
 	}
 	public void setSaldo(double saldo) {
@@ -76,7 +76,7 @@ public class Usuario implements Serializable{
 	public String getFechaAlta() {
 		return this.fechaAlta;
 	}
-	public void setFecha(String fecha) {
+	public void setFechaAlta(String fecha) {
 		this.fechaAlta=fecha;
 	}
 	

@@ -41,6 +41,11 @@ public class BicicletaService {
 	public void editarEstado(long id,String Estado) {
 		repository.updateEstadoById(id, Estado);
 	}
+	public Bicicleta reservar(Bicicleta bici) {
+		bici.setEstado("RESERVADA");
+		bici.setEstacion(null);
+		return bici;
+	}
 	
 	public Bicicleta save (Bicicleta bici) {
 		Bicicleta BiciNueva = repository.save(bici);

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.codeurjc.apirestreservabicicletas.model.Bicicleta;
 import es.codeurjc.apirestreservabicicletas.model.Estacion;
 import es.codeurjc.apirestreservabicicletas.repository.RepoEstacion;
 
@@ -33,6 +34,10 @@ public class EstacionService{
 
 	public List<Estacion> findAll() {
 		return repository.findAll();
+	}
+	public Estacion reservar(Bicicleta bici, Estacion estacion){
+		estacion.borrarBici(bici);
+		return estacion;
 	}
 	
 	public Estacion save(Estacion estacion) {

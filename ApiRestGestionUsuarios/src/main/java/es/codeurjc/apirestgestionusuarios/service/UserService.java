@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.codeurjc.apirestgestionusuarios.NuevoUsuario;
 import es.codeurjc.apirestgestionusuarios.model.Usuario;
 import es.codeurjc.apirestgestionusuarios.repository.RepoUsuario;
 
@@ -42,6 +43,18 @@ public class UserService {
 	public void editarNombre (long id,String name) {
 		repository.updateNombreById(id, name);
 	
+		
+	}
+	public Usuario editarUsuario(Usuario u, NuevoUsuario NewUsuario){
+		if (NewUsuario.getName()!=null||NewUsuario.getName().equals("string")==false) 
+			u.setName(NewUsuario.getName());
+		if(NewUsuario.getLogin()!=null||NewUsuario.getLogin().equals("string")==false)
+			u.setLogin(NewUsuario.getLogin());
+		if(NewUsuario.getContraseña()!=null||NewUsuario.getContraseña().equals("string")==false)
+			u.setContraseña(NewUsuario.getContraseña());
+		if(NewUsuario.getSaldo()!=0)
+			u.setSaldo(NewUsuario.getSaldo());
+		return u;
 		
 	}
 	public void editarActivo (long id,String Estado) {
